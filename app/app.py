@@ -3,24 +3,17 @@ import pandas as pd
 import joblib
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Paths (relative to project root – run with: streamlit run app/app.py)
-# ---------------------------------------------------------------------------
+
 ROOT = Path(__file__).resolve().parent.parent
 MODELS_DIR = ROOT / "models"
 
-# ---------------------------------------------------------------------------
-# Load model & encoders
-# ---------------------------------------------------------------------------
+
 model = joblib.load(MODELS_DIR / "extra_trees_credit_model.pkl")
 encoders = {
     col: joblib.load(MODELS_DIR / f"{col}_encoder.pkl")
     for col in ["Sex", "Housing", "Saving accounts", "Checking account"]
 }
 
-# ---------------------------------------------------------------------------
-# UI
-# ---------------------------------------------------------------------------
 st.title("Credit Risk Prediction App")
 st.write("Enter applicant information to predict if the credit risk is good or bad.")
 
@@ -47,6 +40,6 @@ input_df = pd.DataFrame({
 if st.button("Predict Risk"):
     pred = model.predict(input_df)[0]
     if pred == 1:
-        st.success("The predicted credit risk is: **GOOD** ✅")
+        st.success("The predicted credit risk is: **GOOD**")
     else:
-        st.error("The predicted credit risk is: **BAD** ❌")
+        st.error("The predicted credit risk is: **BAD**")
