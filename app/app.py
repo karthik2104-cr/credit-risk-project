@@ -40,6 +40,6 @@ input_df = pd.DataFrame({
 if st.button("Predict Risk"):
     pred = model.predict(input_df)[0]
     if pred == 1:
-        st.success("The predicted credit risk is: **GOOD** ✅")
+        st.success("The predicted credit risk is: **GOOD** ")
     else:
-        st.error("The predicted credit risk is: **BAD** ❌")
+        st.error("The predicted credit risk is: **BAD** ")
